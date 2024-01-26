@@ -33,6 +33,11 @@ class Fib extends Component {
           <input />
           <button>Submit</button>
         </form>
+
+        <h3>Indexes I have seen:</h3>
+        {this.renderSeenIndexes()}
+
+        <h3>Calculated Values:</h3>
       </div>
     );
   }
