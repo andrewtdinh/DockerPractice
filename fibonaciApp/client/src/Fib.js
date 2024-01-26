@@ -24,4 +24,16 @@ class Fib extends Component {
       seenIndexes: seenIndexes.data
     });
   }
+
+  render() {
+    return (
+      <div>
+        <form>
+          <label>Enter your index:</label>
+          <input />
+          <button>Submit</button>
+        </form>
+      </div>
+    );
+  }
 }
