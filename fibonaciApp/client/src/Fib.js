@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component } from "react";
+import axios from "axios";
 
 class Fib extends Component {
   state = {
     seenIndexes: [],
     values: {},
-    index: ''
+    index: "",
   };
 
   componentDidMount() {
@@ -14,19 +14,33 @@ class Fib extends Component {
   }
 
   async fetchValues() {
-    const values = await axios.get('/api/values/current');
+    const values = await axios.get("/api/values/current");
     this.setState({ values: values.data });
   }
 
   async fetchIndexes() {
-    const seenIndexes = await axios.get('/api/values/all');
-    this.setState({ 
-      seenIndexes: seenIndexes.data
+    const seenIndexes = await axios.get("/api/values/all");
+    this.setState({
+      seenIndexes: seenIndexes.data,
     });
   }
 
   renderSeenIndexes() {
-    return this.state.seenIndexes.map(({ number }) => number).joint(', ');
+    return this.state.seenIndexes.map(({ number }) => number).joint(", ");
+  }
+
+  renderValues() {
+    const entries = [];
+
+    for (let key in this.state.values) {
+      entries.push(
+        <div key={key}>
+          For index {key} I calculated {this.state.values[key]}
+        </div>
+      );
+    }
+
+    return entries;
   }
 
   render() {
@@ -42,6 +56,7 @@ class Fib extends Component {
         {this.renderSeenIndexes()}
 
         <h3>Calculated Values:</h3>
+        {this.renderValues()}
       </div>
     );
   }
